@@ -38,3 +38,10 @@ Template engines that embed logic (conditionals, loops, expressions) create a su
 - `SafeString(str)` — mark a value as pre-escaped to bypass autoescaping.
 
 Built-in filters: `upper`, `lower`, `trim`, `safe`. All transform to escaped output except `safe`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
